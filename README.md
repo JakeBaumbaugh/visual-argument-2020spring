@@ -1,5 +1,7 @@
 Note: The copyrighted images stored in this repository are used in fair use and in support of Avengers: Endgame and its campaign for the 2020 Academy Awards.
 
+---
+
 *2/13/20 Journal* - This preview of my visual argument... certainly looks different than everyone else's. Because I did the base of my collage using code, and I just got that finished, I haven't really gotten to dig into GIMP yet. So, rather than my GIMP project file, I have my code. Again, very different from everyone else's. I have, though, used GIMP to add color to the icons used for the collage, but the actual collage was built entirely randomly using Processing.
 
 I don't believe I have much more to do past this stage. I want to add the text "2020" with a large sans-serif font to the screen, perhaps just negating all color in that space. This may not show up well with the collage beneath, but it's certainly something I'd like to try. In addition, I am considering adding some features to the Academy Award statue to make more clear what it is meant to be. I would like to add a few more characters in the future, especially Spider-Man comes to mind.
