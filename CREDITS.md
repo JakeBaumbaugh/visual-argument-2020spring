@@ -1,0 +1,19 @@
+Icons - 
+- Iron Man			- https://thenounproject.com/term/iron-man/356091/
+	- Iron Man by Jake Dunham from the Noun Project
+- Captain America	- https://thenounproject.com/term/captain-america/2595713/
+	- Captain America by Toli from the Noun Project
+- Thor				- https://thenounproject.com/term/thor/3037111/
+	- Thor by Nicola from the Noun Project
+- Hulk				- https://thenounproject.com/term/hulk/1919887/
+	- hulk by Ryan Safana from the Noun Project
+- Black Widow		- https://thenounproject.com/term/black-widow/1975329/
+	- black widow by Georgiana Ionescu from the Noun Project
+- Star-Lord			- https://thenounproject.com/term/star-lord/1919886/
+	- star lord by Ryan Safana from the Noun Project
+- Ant-Man			- https://thenounproject.com/term/ant-man/2453947/
+	- ant-man by Javier Sánchez - javyliu from the Noun Project
+- Doctor Strange	- https://thenounproject.com/term/doctor-strange/1919879/
+	- doctor strange by Ryan Safana from the Noun Project
+- Black Panther		- https://thenounproject.com/term/black-panther/1919882/
+	- Black Panther by Ryan Safana from the Noun Project
