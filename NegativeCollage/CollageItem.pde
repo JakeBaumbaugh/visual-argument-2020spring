@@ -1,24 +1,28 @@
 class CollageItem {
   
+  int index;
   PImage img;
   PVector pos;
   float scale;
   float rot;
   
-  public CollageItem(PImage img, PVector pos) {
-    this.img = img.copy();
+  public CollageItem(int index, PVector pos, float scale, float rot) {
+    this.index = index;
+    this.img = collagePics.get(index).copy();
     this.img.resize(0,100);
     this.pos = pos;
-    rot = random(0, TWO_PI);
+    this.scale = scale;
+    this.rot = rot;
   }
   
-  public CollageItem(PImage img) {
-    this.img = img.copy();
-    
+  public CollageItem(int index) {
+    this.index = index;
+    this.img = collagePics.get(index).copy();
     this.img.resize(0,floor(random(50, 200)) );
     float posX = random(this.img.width/2,negativeImage.width-this.img.width/2);
     float posY = random(this.img.height/2, negativeImage.height-this.img.height/2);
     pos = new PVector(posX, posY);
+    scale = 1;
     rot = random(0, TWO_PI);
   }
   
@@ -58,21 +62,23 @@ class CollageItem {
   
   void scaleMax() {
     float scaleUpVal = 1.2;
-    float scaleMem = 1;
-    while(!checkCollision(negativeImage) && scaleMem < maxScale) {
+    while(!checkCollision(negativeImage) && scale < maxScale) {
       img.resize(floor(img.width*scaleUpVal), 0);
-      scaleMem *= scaleUpVal;
+      scale *= scaleUpVal;
     }
     scaleDown();
   }
   
   boolean scaleDown() {
     float scaleDownVal = 0.9;
-    float scaleMem = 1;
-    while(checkCollision(negativeImage) && scaleMem > minScale) {
+    while(checkCollision(negativeImage) && scale > minScale) {
       img.resize((int)(img.width*scaleDownVal),0);
-      scaleMem *= scaleDownVal;
+      scale *= scaleDownVal;
     }
     return !checkCollision(negativeImage);
+  }
+  
+  String toString() {
+    return index + " " + floor(pos.x) + " " + floor(pos.y) + " " + scale + " " + rot;
   }
 }

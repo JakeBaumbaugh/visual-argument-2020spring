@@ -78,7 +78,8 @@ void generateCollage(int count) {
   int failCount = 0;
   while(i < count) {
     println("Starting item "+i+".");
-    CollageItem newItem = new CollageItem(collagePics.get(floor(random(collagePics.size()))));
+    int index = floor(random(collagePics.size()));
+    CollageItem newItem = new CollageItem(index);
     if(newItem.checkCollision(negativeImage)) {
       if(newItem.scaleDown()) {
         collageItems.add(newItem);
@@ -122,6 +123,15 @@ ArrayList<PImage> loadImages() {
       return arr;
     }
   }
+}
+
+CollageItem fromString(String s) {
+  String[] params = s.split(" ");
+  int index = Integer.parseInt(params[0]);
+  PVector pos = new PVector(Float.parseFloat(params[1]), Float.parseFloat(params[2]));
+  float scale = Float.parseFloat(params[2]);
+  float rot = Float.parseFloat(params[3]);
+  return new CollageItem(index, pos, scale, rot);
 }
 
 String leadZeroes(int x, int chars) {
