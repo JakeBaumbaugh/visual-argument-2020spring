@@ -1,9 +1,11 @@
 final String negativeSpaceFile = "../assets/award.png";
-final String collageFileBase = "../assets/icons/avenger";
+final String collageFileBase = "../assets/icons/avengerc";
 final String collageFileSuffix = ".png";
 
 final float maxScale = 1.6;
 final float minScale = 0.8;
+
+float opacityValue = 0.7;
 
 PImage negativeImage;
 ArrayList<PImage> collagePics;
@@ -19,7 +21,7 @@ void setup() {
   size(1080,1920);
   //noLoop();
   
-  upShift = -height/3;
+  upShift = 0;
   
   collage = createGraphics(1080,1920);
   
@@ -32,8 +34,9 @@ void setup() {
   
   collage.beginDraw();
   collage.imageMode(CENTER);
+  collage.tint(255, opacityValue*255);
   for(CollageItem c : collageItems)
-    collage.image(c.img, c.pos.x, c.pos.y);
+    c.show(collage);
   collage.endDraw();
   
   //testItem = new CollageItem(collagePics.get(2), new PVector(width/2, height*2/3));
@@ -42,7 +45,7 @@ void setup() {
 }
 
 void draw() {
-  background(218, 165, 32);
+  background(255, 217, 0);
   //drawMask(negativeImage);
   image(collage, 0, upShift);
   //testItem.show();
@@ -50,17 +53,20 @@ void draw() {
     if(key == CODED) {
       switch(keyCode) {
         case UP:
-          upShift-=3;
+          upShift = max(upShift-3,-height);
           break;
         case DOWN:
-          upShift+=3;
+          upShift = min(upShift+3,0);
           break;
       }
     } else {
       image(negativeImage, 0, upShift);
     }
   }
-  //saveFrame(getDateTime() + ".png");
+}
+
+void mouseClicked() {
+  saveFrame(getDateTime() + ".png");
 }
 
 String getDateTime() {

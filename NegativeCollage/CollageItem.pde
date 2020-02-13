@@ -3,12 +3,13 @@ class CollageItem {
   PImage img;
   PVector pos;
   float scale;
+  float rot;
   
   public CollageItem(PImage img, PVector pos) {
     this.img = img.copy();
     this.img.resize(0,100);
     this.pos = pos;
-    scale = 1;
+    rot = random(0, TWO_PI);
   }
   
   public CollageItem(PImage img) {
@@ -18,16 +19,22 @@ class CollageItem {
     float posX = random(this.img.width/2,negativeImage.width-this.img.width/2);
     float posY = random(this.img.height/2, negativeImage.height-this.img.height/2);
     pos = new PVector(posX, posY);
-    scale = 1;
+    rot = random(0, TWO_PI);
   }
   
-  void show() {
-    image(img, pos.x, pos.y);
+  void show(PGraphics pg) {
+    pg.pushMatrix();
+    pg.translate(pos.x, pos.y);
+    pg.rotate(rot);
+    pg.image(img, 0, 0);
+    pg.popMatrix();
   }
   
   boolean checkCollision(PImage other) {
     pushMatrix();
-    translate(pos.x-img.width/2, pos.y-img.height/2);
+    translate(pos.x, pos.y);
+    rotate(rot);
+    translate(-img.width/2, -img.height/2);
     img.loadPixels();
     //other.loadPixels();
     for(int i = 0; i<img.pixels.length; i++) {
@@ -36,7 +43,7 @@ class CollageItem {
         continue;
       PVector imageCoord = new PVector(i%img.width, i/img.width);
       PVector screenCoord = new PVector(screenX(imageCoord.x,imageCoord.y), screenY(imageCoord.x,imageCoord.y));
-      if(screenCoord.x<0 || screenCoord.x>width || screenCoord.y<0 || screenCoord.y>height) {
+      if(screenCoord.x<0 || screenCoord.x>=width || screenCoord.y<0 || screenCoord.y>=height) {
         continue;
       }
       color otherPixel = other.pixels[floor(screenCoord.y)*other.width + floor(screenCoord.x)];
