@@ -5,7 +5,7 @@ final String collageFileSuffix = ".png";
 final float maxScale = 1.6;
 final float minScale = 0.8;
 
-float opacityValue = 0.7;
+float opacityValue = 1;
 
 PImage negativeImage;
 ArrayList<PImage> collagePics;

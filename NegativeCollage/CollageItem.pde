@@ -23,7 +23,7 @@ class CollageItem {
     float posY = random(this.img.height/2, negativeImage.height-this.img.height/2);
     pos = new PVector(posX, posY);
     scale = 1;
-    rot = random(0, TWO_PI);
+    rot = random(-PI/4, PI/4);
   }
   
   void show(PGraphics pg) {
