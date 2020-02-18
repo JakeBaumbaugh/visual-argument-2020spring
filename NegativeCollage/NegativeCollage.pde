@@ -2,8 +2,8 @@ final String negativeSpaceFile = "../assets/award.png";
 final String collageFileBase = "../assets/icons/avengerc";
 final String collageFileSuffix = ".png";
 
-final float maxScale = 1.6;
-final float minScale = 0.8;
+final float globalMaxScale = 2.4;
+final float globalMinScale = 0.8;
 
 float opacityValue = 1;
 
@@ -18,30 +18,33 @@ CollageItem testItem;
 float upShift;
 
 void setup() {
-  size(1080,1920);
+  size(1080, 1920);
   //noLoop();
-  
+
   upShift = 0;
-  
-  collage = createGraphics(1080,1920);
+
+  collage = createGraphics(1080, 1920);
+  collagePics = loadImages();
+
+  collageItems = loadCollage("savedata.txt");
   
   negativeImage = loadImage(negativeSpaceFile);
   negativeImage.loadPixels();
-  collagePics = loadImages();
-  collageItems = new ArrayList<CollageItem>();
   
-  generateCollage(2500);
-  
+  if(collageItems == null) {
+    collageItems = new ArrayList<CollageItem>();
+    generateCollage(2500);
+  }
+
   collage.beginDraw();
   collage.imageMode(CENTER);
   collage.tint(255, opacityValue*255);
-  for(CollageItem c : collageItems)
+  for (CollageItem c : collageItems)
     c.show(collage);
   collage.endDraw();
-  
+
   //testItem = new CollageItem(collagePics.get(2), new PVector(width/2, height*2/3));
-  println(negativeImage.pixels.length);
- 
+  //println(negativeImage.pixels.length);
 }
 
 void draw() {
@@ -49,15 +52,15 @@ void draw() {
   //drawMask(negativeImage);
   image(collage, 0, upShift);
   //testItem.show();
-  if(keyPressed) {
-    if(key == CODED) {
+  if (keyPressed) {
+    if (key == CODED) {
       switch(keyCode) {
-        case UP:
-          upShift = max(upShift-3,-height);
-          break;
-        case DOWN:
-          upShift = min(upShift+3,0);
-          break;
+      case UP:
+        upShift = max(upShift-3, -height);
+        break;
+      case DOWN:
+        upShift = min(upShift+3, 0);
+        break;
       }
     } else {
       image(negativeImage, 0, upShift);
@@ -67,6 +70,37 @@ void draw() {
 
 void mouseClicked() {
   saveFrame(getDateTime() + ".png");
+  saveCollage("savedata.txt");
+}
+
+void saveCollage(String s) {
+  PrintWriter output = createWriter(s);
+  for (CollageItem c : collageItems) {
+    output.println(c);
+  }
+  output.flush();
+  output.close();
+}
+
+ArrayList<CollageItem> loadCollage(String s) {
+  BufferedReader input = createReader(s);
+  if(input == null) {
+    return null;
+  }
+  ArrayList<CollageItem> collage = new ArrayList<CollageItem>();
+  String line = null;
+  int count = 0;
+  try {
+    while ((line = input.readLine()) != null) {
+      println("Loading line " + (count++) + ".");
+      collage.add(fromString(line));
+    }
+    input.close();
+  } catch (IOException e) {
+    println("Uh oh spaghetti-o.");
+    return null;
+  }
+  return collage;
 }
 
 String getDateTime() {
@@ -76,12 +110,12 @@ String getDateTime() {
 void generateCollage(int count) {
   int i = 0;
   int failCount = 0;
-  while(i < count) {
+  while (i < count) {
     println("Starting item "+i+".");
     int index = floor(random(collagePics.size()));
     CollageItem newItem = new CollageItem(index);
-    if(newItem.checkCollision(negativeImage)) {
-      if(newItem.scaleDown()) {
+    if (newItem.checkCollision(negativeImage)) {
+      if (newItem.scaleDown()) {
         collageItems.add(newItem);
       }
       failCount++;
@@ -99,13 +133,13 @@ void generateCollage(int count) {
 void drawMask(PImage img) {
   loadPixels();
   img.loadPixels();
-  for(int i = 0; i < img.pixels.length; i++) {
-    if(alpha(img.pixels[i]) != 0) {
+  for (int i = 0; i < img.pixels.length; i++) {
+    if (alpha(img.pixels[i]) != 0) {
       int bkgPixel = i + floor(upShift*width);
-      if(bkgPixel < 0) {
+      if (bkgPixel < 0) {
         continue;
       }
-      pixels[bkgPixel] = color(255,0,0);
+      pixels[bkgPixel] = color(255, 0, 0);
     }
   }
   updatePixels();
@@ -114,9 +148,9 @@ void drawMask(PImage img) {
 ArrayList<PImage> loadImages() {
   ArrayList<PImage> arr = new ArrayList<PImage>();
   int i = 0;
-  while(true) {
+  while (true) {
     PImage tempImg = loadImage(collageFileBase + leadZeroes(++i, 2) + collageFileSuffix);
-    if(tempImg != null) {
+    if (tempImg != null) {
       arr.add(tempImg);
       continue;
     } else {
@@ -129,14 +163,15 @@ CollageItem fromString(String s) {
   String[] params = s.split(" ");
   int index = Integer.parseInt(params[0]);
   PVector pos = new PVector(Float.parseFloat(params[1]), Float.parseFloat(params[2]));
-  float scale = Float.parseFloat(params[2]);
-  float rot = Float.parseFloat(params[3]);
+  float scale = Float.parseFloat(params[3]);
+  float rot = Float.parseFloat(params[4]);
+  //println("Making CollageItem with index "+index+", pos ("+pos.x+","+pos.y+"), scale "+scale+" and angle "+rot+".");
   return new CollageItem(index, pos, scale, rot);
 }
 
 String leadZeroes(int x, int chars) {
   String s = ""+x;
-  while(s.length() < chars)
+  while (s.length() < chars)
     s = '0'+s;
   return s;
 }

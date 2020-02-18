@@ -8,21 +8,21 @@ class CollageItem {
   
   public CollageItem(int index, PVector pos, float scale, float rot) {
     this.index = index;
-    this.img = collagePics.get(index).copy();
-    this.img.resize(0,100);
+    img = collagePics.get(index).copy();
     this.pos = pos;
     this.scale = scale;
+    img.resize(0,floor(100*scale));
     this.rot = rot;
   }
   
   public CollageItem(int index) {
     this.index = index;
-    this.img = collagePics.get(index).copy();
-    this.img.resize(0,floor(random(50, 200)) );
+    img = collagePics.get(index).copy();
+    scale = random(0.5,2);
+    img.resize(0,floor(100*scale));
     float posX = random(this.img.width/2,negativeImage.width-this.img.width/2);
     float posY = random(this.img.height/2, negativeImage.height-this.img.height/2);
     pos = new PVector(posX, posY);
-    scale = 1;
     rot = random(-PI/4, PI/4);
   }
   
@@ -61,6 +61,7 @@ class CollageItem {
   }
   
   void scaleMax() {
+    float maxScale = globalMaxScale - random(0.4);
     float scaleUpVal = 1.2;
     while(!checkCollision(negativeImage) && scale < maxScale) {
       img.resize(floor(img.width*scaleUpVal), 0);
@@ -70,6 +71,7 @@ class CollageItem {
   }
   
   boolean scaleDown() {
+    float minScale = globalMinScale + random(0.2);
     float scaleDownVal = 0.9;
     while(checkCollision(negativeImage) && scale > minScale) {
       img.resize((int)(img.width*scaleDownVal),0);
