@@ -2,8 +2,8 @@ final String negativeSpaceFile = "../assets/award.png";
 final String collageFileBase = "../assets/icons/avengerc";
 final String collageFileSuffix = ".png";
 
-final float globalMaxScale = 2.4;
-final float globalMinScale = 0.8;
+final float globalMaxScale = 2.0;
+final float globalMinScale = 0.5;
 
 float opacityValue = 1;
 
@@ -16,6 +16,8 @@ PGraphics collage;
 CollageItem testItem;
 
 float upShift;
+
+boolean saved=true;
 
 void setup() {
   size(1080, 1920);
@@ -33,7 +35,8 @@ void setup() {
   
   if(collageItems == null) {
     collageItems = new ArrayList<CollageItem>();
-    generateCollage(2500);
+    generateCollage(4000);
+    saved=false;
   }
 
   collage.beginDraw();
@@ -63,14 +66,17 @@ void draw() {
         break;
       }
     } else {
-      image(negativeImage, 0, upShift);
+      if(key == ' ' && !saved) {
+        saveCollage("savedata.txt");
+      } else {
+        
+      }image(negativeImage, 0, upShift);
     }
   }
 }
 
 void mouseClicked() {
   saveFrame(getDateTime() + ".png");
-  saveCollage("savedata.txt");
 }
 
 void saveCollage(String s) {
