@@ -80,6 +80,10 @@ class CollageItem {
     return !checkCollision(negativeImage);
   }
   
+  void blur(float rad) {
+    img.filter(BLUR, rad);
+  }
+  
   String toString() {
     return index + " " + floor(pos.x) + " " + floor(pos.y) + " " + scale + " " + rot;
   }

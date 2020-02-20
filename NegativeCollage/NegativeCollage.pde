@@ -39,6 +39,8 @@ void setup() {
     saved=false;
   }
 
+  //blurImages();
+
   collage.beginDraw();
   collage.imageMode(CENTER);
   collage.tint(255, opacityValue*255);
@@ -149,6 +151,13 @@ void drawMask(PImage img) {
     }
   }
   updatePixels();
+}
+
+void blurImages() {
+  int size = collageItems.size();
+  for(int i = 0; i < size; i++) {
+    collageItems.get(i).blur(map(i, 0, size, 4, 0));
+  }
 }
 
 ArrayList<PImage> loadImages() {

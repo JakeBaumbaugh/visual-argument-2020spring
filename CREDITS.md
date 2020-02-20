@@ -13,6 +13,12 @@ Icons -
 	- black widow by Georgiana Ionescu from the Noun Project
 - Star-Lord			- https://thenounproject.com/term/star-lord/1919886/ - CC-BY
 	- star lord by Ryan Safana from the Noun Project
+- Groot				- https://thenounproject.com/safanaryan/uploads/?i=1919885 - CC-BY
+	- Groot by Ryan Safana from the Noun Project
+- Nebula			- https://thenounproject.com/search/?q=avengers&i=2463444 - CC-BY
+	- Nebula by Javier Sánchez - javyliu from the Noun Project
+- Spider-Man		- https://thenounproject.com/safanaryan/collection/avengers/?i=1919884 - CC-BY
+	- spiderman by Ryan Safana from the Noun Project
 - Ant-Man			- https://thenounproject.com/term/ant-man/2453947/ - CC-BY
 	- ant-man by Javier Sánchez - javyliu from the Noun Project
 - Doctor Strange	- https://thenounproject.com/term/doctor-strange/1919879/ - CC-BY
