@@ -1,5 +1,7 @@
 Academy Award Statue - https://www.pngwave.com/png-clip-art-vwssk - No Attribution Required (Non-Commercial)
 
+The following images have been edited for this project:
+
 Icons - 
 - Iron Man			- https://thenounproject.com/term/iron-man/356091/ - CC-BY
 	- Iron Man by Jake Dunham from the Noun Project
